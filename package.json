@@ -1,0 +1,22 @@
+{
+  "name": "homework_10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordan-skophammer/bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordan-skophammer/bamazon/issues"
+  },
+  "homepage": "https://github.com/jordan-skophammer/bamazon#readme",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
+}

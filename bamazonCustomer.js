@@ -15,27 +15,23 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    // displayItems(itemQuery);
-    itemQuery()
+    displayItems();
+    // itemQuery()
 });
 
-function displayItems(inquire) {
+function displayItems() {
 
     
     connection.query("SELECT * FROM products", function(err, res) {
         for (let i = 0; i < res.length; i++) {
         console.log(res[i].item_id + " " + res[i].product_name + " " + res[i].department_name + " " + "$" + res[i].price);
         }
-        connection.end();
-    })
-    
-    inquire()
+
+        itemQuery()
+    })   
 }
 
 function itemQuery() {
-    displayItems(function() {
-        console.log("DONE!")
-    })
 
     inquirer.prompt([
         {

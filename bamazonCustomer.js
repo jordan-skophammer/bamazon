@@ -1,6 +1,5 @@
 var mysql = require("mysql");
-
-var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -15,15 +14,39 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) throw err;
-  displayItems();
+    if (err) throw err;
+    // displayItems(itemQuery);
+    itemQuery()
 });
 
-function displayItems() {
-    connection.query("SELECT * FROM products", function(err, res) {
-        if (err) throw err;
-        console.log(res);
-        connection.end();
-      });
+function displayItems(inquire) {
 
+    
+    connection.query("SELECT * FROM products", function(err, res) {
+        for (let i = 0; i < res.length; i++) {
+        console.log(res[i].item_id + " " + res[i].product_name + " " + res[i].department_name + " " + "$" + res[i].price);
+        }
+        connection.end();
+    })
+    
+    inquire()
+}
+
+function itemQuery() {
+    displayItems(function() {
+        console.log("DONE!")
+    })
+
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "item",
+            message: "Please choose the number of the item you would like to purchase."
+        },
+        {
+            type: "input",
+            name: "quanity",
+            message: "How many items would you like to purchase?"
+        }
+    ])
 }

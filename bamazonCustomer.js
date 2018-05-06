@@ -26,23 +26,34 @@ function displayItems() {
         for (let i = 0; i < res.length; i++) {
         console.log(res[i].item_id + " " + res[i].product_name + " " + res[i].department_name + " " + "$" + res[i].price);
         }
+        console.log("_____________________________")
 
-        itemQuery()
+        // itemQuery()
+
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "item",
+                message: "Please choose the number of the item you would like to purchase."
+            },
+            {
+                type: "input",
+                name: "quanity",
+                message: "How many items would you like to purchase?"
+            }
+        ]).then(function customerPO(answer){
+    
+            console.log("___________")
+            console.log(res[answer.item].product_name)
+            console.log(res[answer.item].stock_quanity)
+        })
     })   
 }
 
-function itemQuery() {
+// function itemQuery(price) {
 
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "item",
-            message: "Please choose the number of the item you would like to purchase."
-        },
-        {
-            type: "input",
-            name: "quanity",
-            message: "How many items would you like to purchase?"
-        }
-    ])
-}
+    
+
+    
+// }
+

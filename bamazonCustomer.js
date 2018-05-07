@@ -21,10 +21,11 @@ connection.connect(function(err) {
 
 function displayInventory() {
     connection.query("SELECT * FROM products", function(err, res) {
+    
         for (let i = 0; i < res.length; i++) {
-        console.log(res[i].item_id + " " + res[i].product_name + " " + res[i].department_name + " " + "$" + res[i].price);
-        }
-        console.log("_____________________________")
+        console.log(res[i].item_id + " " + res[i].product_name + " " + res[i].department_name + " " + "$" + res[i].price.toFixed(2));
+        };
+        console.log("_____________________________");
     
         inquirer.prompt([
             {
@@ -46,12 +47,9 @@ function displayInventory() {
             var stock_quanity = res[answer.item].stock_quanity
     
             itemQuery(customerItem, productName, customerQuanity, productPrice, stock_quanity)
-        })
-    }) 
-}
-    
-  
-
+        });
+    });
+};
 
 function itemQuery(id, product, quanity, price, stock) {
 
@@ -61,13 +59,13 @@ function itemQuery(id, product, quanity, price, stock) {
     if(updatedStock >= 0) {
         connection.query("UPDATE products SET stock_quanity = ? WHERE item_id = ?", [updatedStock, id], function(err, res) {
             if (err) throw err;
-            console.log("\nYour Order Summary: \n\n " + product + "     Qty: " + quanity + "\n\n Total: $" + total)
-        })
+            console.log("\nYour Order Summary: \n\n " + product + "     Qty: " + quanity + "\n\n Total: $" + total);
+        });
 
     }else {
-        console.log("\nSorry, Bamazon has a insufficient quanity to fulfill your order.\n")
+        console.log("\nSorry, Bamazon has a insufficient quanity to fulfill your order.\n");
         displayInventory();
-    }
+    };
 
     connection.end();
-}
+};
